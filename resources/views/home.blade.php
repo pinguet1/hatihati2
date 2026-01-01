@@ -5,5 +5,5 @@
 </p>
 
 @foreach($groups as $group)
-    {{ $group->name }}
+    {{$group->name}}
 @endforeach

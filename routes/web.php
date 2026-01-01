@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Group;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -29,8 +30,15 @@ Route::post('/groups', function () {
 
 
     //redirect back to home
-    return redirect ('/', ['groups' => $groups]);
+    return redirect ('/');
 });
+
+
 Route::get('/', function () {
-    return view('home');
+
+
+    $groups = Group::all();
+
+
+    return view('home',['groups'=>$groups]);
 });
