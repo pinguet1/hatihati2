@@ -12,11 +12,12 @@ Route::get('/signin/angello', function () {
 
 Route::post('/groups/create', function () {
     //add group to the database
+    \App\Models\Group::create([
+        'name' => request()->validate
+    ]);
     //attach group to group_user pivot table
     //redirect back to home
-    \App\Models\Group::create([
-       'name' => request()->validate
-    ]);
+
 });
 Route::get('/', function () {
     return view('home');
