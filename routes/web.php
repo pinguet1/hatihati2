@@ -16,13 +16,20 @@ Route::get('/groups/create', function () {
 
 Route::post('/groups', function () {
     //add group to the database
-    \App\Models\Group::create([
-        'name' => request()->validate
+
+    request()->validate([
+        'name'=>['required']
+    ]);
+
+    $groups = \App\Models\Group::create([
+        'name' => request('name')
     ]);
 
     //attach group to group_user pivot table
+
+
     //redirect back to home
-    return redirect ('/');
+    return redirect ('/', ['groups' => $groups]);
 });
 Route::get('/', function () {
     return view('home');

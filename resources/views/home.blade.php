@@ -3,3 +3,7 @@
 <p>
     <a href="/groups/create">Add New Group</a>
 </p>
+
+@foreach($groups as $group)
+    {{ $group->name }}
+@endforeach
