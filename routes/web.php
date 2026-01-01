@@ -10,14 +10,19 @@ Route::get('/signin/angello', function () {
     return redirect('/');
 });
 
-Route::post('/groups/create', function () {
+Route::get('/groups/create', function () {
+   return view ('groups.create');
+});
+
+Route::post('/groups', function () {
     //add group to the database
     \App\Models\Group::create([
         'name' => request()->validate
     ]);
+
     //attach group to group_user pivot table
     //redirect back to home
-
+    return redirect ('/');
 });
 Route::get('/', function () {
     return view('home');
