@@ -22,12 +22,13 @@ Route::post('/groups', function () {
         'name'=>['required']
     ]);
 
-    $groups = \App\Models\Group::create([
+    $group = \App\Models\Group::create([
         'name' => request('name')
     ]);
 
     //attach group to group_user pivot table
 
+    Auth::user()->groups()->attach($group->id);
 
     //redirect back to home
     return redirect ('/');

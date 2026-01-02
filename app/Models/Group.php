@@ -13,6 +13,6 @@ class Group extends Model
 
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(Group::class);
+        return $this->belongsToMany(User::class);
     }
 }
