@@ -39,9 +39,9 @@ Route::post('/groups', function () {
     return redirect ('/');
 });
 
-Route::get('/group/{group}', function(Group $group) {
+Route::get('/group/{groupId}', function(Group $groupId) {
 
-    Group::get();
+    $group = Group::whereAttachedTo(Auth::user())->find($groupId);
 
     return view('groups.show', ['group' => $group ]);
 });
@@ -52,8 +52,7 @@ Route::get('/', function () {
 
     $groups = Group::all();
 
-
     return view('home',['groups'=>$groups]);
 
 
-})->middleware('auth');
+});
