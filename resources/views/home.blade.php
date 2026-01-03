@@ -5,5 +5,7 @@
 </p>
 
 @foreach($groups as $group)
-    {{$group->name}}
+    <li>
+        <a href="group/{{ $group -> id }}">{{$group->name}}</a>
+    </li>
 @endforeach

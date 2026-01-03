@@ -11,6 +11,11 @@ Route::get('/signin/angello', function () {
     return redirect('/');
 });
 
+Route::get('/signin/mich', function () {
+    auth()->login(User::find(2));
+    return redirect('/');
+});
+
 Route::get('/groups/create', function () {
    return view ('groups.create');
 });
@@ -34,6 +39,13 @@ Route::post('/groups', function () {
     return redirect ('/');
 });
 
+Route::get('/group/{group}', function(Group $group) {
+
+    Group::get();
+
+    return view('groups.show', ['group' => $group ]);
+});
+
 
 Route::get('/', function () {
 
@@ -42,4 +54,6 @@ Route::get('/', function () {
 
 
     return view('home',['groups'=>$groups]);
-});
+
+
+})->middleware('auth');
