@@ -39,18 +39,21 @@ Route::post('/groups', function () {
     return redirect ('/');
 });
 
-Route::get('/group/{groupId}', function(Group $groupId) {
+Route::get('/group/{group}', function(Group $group) {
 
-    $group = Group::whereAttachedTo(Auth::user())->find($groupId);
+    if ($group->users->doesntContain(Auth::User())) {
+        abort(403);
+    }
 
-    return view('groups.show', ['group' => $group ]);
+    return view('groups.show', [
+        'group' => $group ]);
 });
 
 
 Route::get('/', function () {
 
 
-    $groups = Group::all();
+    $groups = Group::whereAttachedTo(Auth::user())->get();
 
     return view('home',['groups'=>$groups]);
 
