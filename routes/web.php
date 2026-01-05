@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GroupController;
 use App\Models\Group;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -11,39 +12,8 @@ Route::get('/signin/angello', function () {
     return redirect ('/');
 });
 
-Route::get('/', function (){
-
-    $groups = Group::whereAttachedTo(
-        Auth::user())->get();
-
-   return view ('home', ['groups' => $groups]) ;
-});
-
-Route::post('/groups', function  (){
-
-    request()->validate([
-       'name' => 'required'
-    ]);
-
-    $group = Group::create([
-       'name' => request('name')
-    ]);
-
-    Auth::user()->groups()->attach($group->id);
-
-    return redirect('/');
-});
-
-Route::get('group/{group}', function (Group $group){
-
-    if ($group->users->doesntContain(Auth::user())) {
-        abort(403);
-    }
-
-    return view('groups.show', ['group' => $group]);
-});
-
-Route::get('/groups/create', function () {
-   return view ('groups.create');
-});
+Route::get('/', [GroupController::class, 'index']);
+Route::post('/groups', [GroupController::class, 'store']);
+Route::get('group/{group}', [GroupController::class, 'show']);
+Route::get('/groups/create', [GroupController::class,'create']);
 
