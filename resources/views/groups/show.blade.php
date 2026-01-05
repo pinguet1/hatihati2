@@ -1,3 +1,21 @@
-<h1>Welcome to</h1>
+<h1> {{ $group->users->first()->name }} Welcome to your group</h1>
 
-<h3>{{ $group->users->first()->name }}</h3>
+<h3>{{ $group->name }}</h3>
+
+<form action="" method="POST">
+    @csrf
+    <div>
+        <p> Add an expense </p>
+
+        <p>description</p>
+
+        <input id="description" type="text" name="description">
+
+        <p>amount</p>
+
+        <input id="amount" type="number" name="amount">
+
+        <button>submit</button>
+    </div>
+
+</form>

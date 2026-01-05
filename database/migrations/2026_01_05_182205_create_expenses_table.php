@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('expenses', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('paid_by')->constrained('users');
+            $table->string('description');
+            $table->decimal('amount');
             $table->timestamps();
         });
     }
