@@ -8,54 +8,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/signin/angello', function () {
     auth()->login(User::find(1));
-    return redirect('/');
+    return view ('/');
 });
 
-Route::get('/signin/mich', function () {
-    auth()->login(User::find(2));
-    return redirect('/');
-});
+
 
 Route::get('/groups/create', function () {
    return view ('groups.create');
 });
 
-Route::post('/groups', function () {
-    //add group to the database
-
-    request()->validate([
-        'name'=>['required']
-    ]);
-
-    $group = \App\Models\Group::create([
-        'name' => request('name')
-    ]);
-
-    //attach group to group_user pivot table
-
-    Auth::user()->groups()->attach($group->id);
-
-    //redirect back to home
-    return redirect ('/');
-});
-
-Route::get('/group/{group}', function(Group $group) {
-
-    if ($group->users->doesntContain(Auth::User())) {
-        abort(403);
-    }
-
-    return view('groups.show', [
-        'group' => $group ]);
-});
-
-
-Route::get('/', function () {
-
-
-    $groups = Group::whereAttachedTo(Auth::user())->get();
-
-    return view('home',['groups'=>$groups]);
-
-
-});
