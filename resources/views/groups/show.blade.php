@@ -2,7 +2,7 @@
 
 <h3>{{ $group->name }}</h3>
 
-<form action="" method="POST">
+<form action="/expenses" method="POST">
     @csrf
     <div>
         <p> Add an expense </p>

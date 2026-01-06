@@ -30,5 +30,7 @@ Route::post('/expenses', function () {
         'amount' => require('amount')
     ]);
 
+    dd($expense);
+
 });
 

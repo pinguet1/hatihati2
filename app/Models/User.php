@@ -51,4 +51,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Group::class);
     }
+
+    public function payer()
+    {
+        return $this->belongsTo(Expense::class);
+    }
 }
