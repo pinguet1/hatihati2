@@ -18,19 +18,7 @@ Route::post('/groups', [GroupController::class, 'store']);
 Route::get('group/{group}', [GroupController::class, 'show']);
 Route::get('/groups/create', [GroupController::class,'create']);
 
-Route::post('/expenses', function () {
 
-    request()->validate([
-       'description'=> require('description'),
-        'amount'=>require('amount')
-    ]);
+Route::post('/expenses', [\App\Http\Controllers\ExpenseController::class, 'store']);
 
-    $expense = Expense::create([
-        'description' =>request('description'),
-        'amount' => require('amount')
-    ]);
-
-    dd($expense);
-
-});
 
