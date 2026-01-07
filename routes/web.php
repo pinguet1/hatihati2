@@ -21,16 +21,16 @@ Route::get('/groups/create', [GroupController::class,'create']);
 Route::post('/expenses', function () {
 
     request()->validate([
-       'description'=> require('description'),
-        'amount'=>require('amount')
+       'description'=> 'required',
+        'amount'=>'required',
     ]);
 
-    $expense = Expense::create([
+    Expense::create([
         'description' =>request('description'),
-        'amount' => require('amount')
+        'amount' => request('amount'),
+        'paid_by' => auth()->id()
     ]);
 
-    dd($expense);
-
+    return redirect()->back();
 });
 

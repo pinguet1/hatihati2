@@ -52,8 +52,8 @@ class User extends Authenticatable
         return $this->belongsToMany(Group::class);
     }
 
-    public function payer()
+    public function paidExpenses()
     {
-        return $this->belongsTo(Expense::class);
+        return $this->hasMany(Expense::class, 'paid_by');
     }
 }

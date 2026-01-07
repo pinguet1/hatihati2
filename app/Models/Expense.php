@@ -8,11 +8,12 @@ class Expense extends Model
 {
     protected $fillable = [
         'description',
-        'amount'
+        'amount',
+        'paid_by'
     ];
 
-    public function paidExpenses() {
+    public function payer() {
 
-        return $this -> belongsTo(User::class);
+        return $this -> belongsTo(User::class, 'paid_by');
     }
 }
