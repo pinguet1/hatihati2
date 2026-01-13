@@ -12,6 +12,22 @@
             </li>
         @endforeach
     </ul>
+
+    <details>
+        <summary>
+            Invite a new member
+        </summary>
+
+        <form method="POST" action="/groups/{{$group->id}}/people">
+            @csrf
+
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email"/>
+
+            <button>Invite</button>
+        </form>
+    </details>
+
 </section>
 
 <form action="/expenses" method="POST">
