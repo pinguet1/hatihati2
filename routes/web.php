@@ -17,24 +17,8 @@ Route::get('/', [GroupController::class, 'index']);
 Route::post('/groups', [GroupController::class, 'store']);
 Route::get('group/{group}', [GroupController::class, 'show']);
 Route::get('/groups/create', [GroupController::class,'create']);
+Route::post('/group/{group}/people', [GroupController::class,'addUser']);
 
-Route::post('/group/{group}/people', function (Group $group) {
-    if ($group -> users -> doesntContain(Auth::user())) {
-        abort(403);
-    }
-
-    $user = User::where('email', request('email'))->first();
-
-    if (!$user) {
-        $user = User::create([
-            'email' => request('email'),
-        ]);
-    }
-
-    $group->users()->syncWithoutDetaching($user);
-
-    return redirect()->back();
-});
 Route::post('/expenses', [\App\Http\Controllers\ExpenseController::class, 'store']);
 
 

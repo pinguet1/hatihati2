@@ -1,6 +1,18 @@
+
 <h1> {{ $group->users->first()->name }} Welcome to your group</h1>
 
 <h3>{{ $group->name }}</h3>
+
+<section>
+    <h2>People in {{$group->name}}</h2>
+    <ul>
+        @foreach($users as $user)
+            <li>
+                {{ $user->name ?? $user->email }}
+            </li>
+        @endforeach
+    </ul>
+</section>
 
 <form action="/expenses" method="POST">
     @csrf
