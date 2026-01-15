@@ -18,7 +18,7 @@
             Invite a new member
         </summary>
 
-        <form method="POST" action="/groups/{{$group->id}}/people">
+        <form method="POST" action="/group/{{$group->id}}/people">
             @csrf
 
             <label for="email">Email</label>
@@ -30,20 +30,26 @@
 
 </section>
 
-<form action="/expenses" method="POST">
-    @csrf
-    <div>
-        <p> Add an expense </p>
+<section>
 
-        <p>description</p>
+    <form action="/expenses" method="POST">
+        @csrf
+        <details>
+            <summary> Add an expense </summary>
 
-        <input id="description" type="text" name="description">
+            <label for="description">description</label>
+            <input id="description" type="text" name="description">
 
-        <p>amount</p>
+            <label for="amount">amount</label>
+            <input id="amount" type="number" name="amount">
 
-        <input id="amount" type="number" name="amount">
+            <button>submit</button>
+        </details>
+    </form>
 
-        <button>submit</button>
-    </div>
+{{--    @foreach($expenses as $expense)--}}
 
-</form>
+{{--    @endforeach--}}
+
+</section>
+

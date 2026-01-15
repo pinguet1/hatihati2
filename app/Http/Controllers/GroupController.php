@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Expense;
 use App\Models\Group;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -39,12 +40,13 @@ class GroupController extends Controller
 
     public function show (Group $group) {
 
-        if ($group->users->doesntContain(Auth::user())) {
+        $users = User::whereAttachedTo($group)->get();
+
+        if ($users->doesntContain(Auth::user())) {
             abort(403);
         }
 
-        $users = User::whereAttachedTo($group)->get();
-
+        //$expenses = Expense::with()
         return view('groups.show', [
             'group' => $group,
             'users'=> $users]);
@@ -59,7 +61,7 @@ class GroupController extends Controller
 
         $user = User::where('email', request('email'))->first();
 
-        if (!$user) {
+        if (! $user) {
             $user = User::create([
                 'email' => request('email'),
             ]);
