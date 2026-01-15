@@ -21,7 +21,7 @@ class ExpenseController extends Controller
             'paid_by' => auth()->id()
         ]);
 
-        $expense->expenses()->attach($group->id);
+        $expense->payers()->attach($group->id);
 
         return redirect()->back();
     }
