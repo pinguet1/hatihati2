@@ -32,7 +32,7 @@
 
 <section>
 
-    <form action="/expenses" method="POST">
+    <form action="/expenses/{{$group->id}}" method="POST">
         @csrf
         <details>
             <summary> Add an expense </summary>
@@ -46,10 +46,6 @@
             <button>submit</button>
         </details>
     </form>
-
-    @foreach($group->users()->expense as $expense)
-        <h1>{{ $expense->amount }}</h1>
-    @endforeach
 
 </section>
 

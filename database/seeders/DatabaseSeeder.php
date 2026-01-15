@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Group;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -28,5 +29,6 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin2@admin.com',
             'password' => 'hello'
         ]);
+
     }
 }

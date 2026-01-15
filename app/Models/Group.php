@@ -15,4 +15,9 @@ class Group extends Model
     {
         return $this->belongsToMany(User::class);
     }
+
+    public function expenses()
+    {
+        return $this -> hasMany(Expense::class);
+    }
 }
