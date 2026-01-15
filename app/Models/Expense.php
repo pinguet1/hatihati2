@@ -3,13 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Expense extends Model
 {
     protected $fillable = [
         'description',
         'amount',
-        'paid_by',
+        'user_id',
         'group_id',
     ];
 
@@ -18,7 +19,8 @@ class Expense extends Model
         return $this -> belongsTo(User::class, 'paid_by');
     }
 
-    public function payers() {
+    public function groups() :BelongsTo
+    {
 
         return $this -> belongsTo(Group::class, 'group_id');
     }

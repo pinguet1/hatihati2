@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('expenses', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('paid_by')->constrained('users');
+            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('group_id')->constrained('groups');
             $table->string('description');
             $table->decimal('amount');
             $table->timestamps();

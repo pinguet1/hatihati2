@@ -18,7 +18,7 @@ class ExpenseController extends Controller
         Expense::create([
             'description' =>request('description'),
             'amount' => request('amount'),
-            'paid_by' => auth()->id(),
+            'user_id' => auth()->id(),
             'group_id' => $group->id
         ]);
 

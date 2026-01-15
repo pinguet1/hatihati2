@@ -49,3 +49,9 @@
 
 </section>
 
+@foreach($expenses as $expense)
+
+    {{ $expense->paid_by }}
+
+@endforeach()
+
