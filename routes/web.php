@@ -14,6 +14,11 @@ Route::get('/signin/angello', function () {
     return redirect ('/');
 });
 
+Route::get('/signin/mich', function () {
+    auth()->login(User::find(2));
+    return redirect ('/');
+});
+
 Route::get('/', [GroupController::class, 'index']);
 Route::post('/groups', [GroupController::class, 'store']);
 Route::get('group/{group}', [GroupController::class, 'show']);

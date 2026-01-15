@@ -47,9 +47,9 @@
         </details>
     </form>
 
-{{--    @foreach($expenses as $expense)--}}
-
-{{--    @endforeach--}}
+    @foreach($group->users()->expense as $expense)
+        <h1>{{ $expense->amount }}</h1>
+    @endforeach
 
 </section>
 

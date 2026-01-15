@@ -10,20 +10,23 @@ use Illuminate\Support\Facades\Auth;
 
 class GroupController extends Controller
 {
-    public function index () {
+    public function index()
+    {
 
         $groups = Group::whereAttachedTo(
             Auth::user())->get();
 
-        return view ('home', ['groups' => $groups]);
+        return view('home', ['groups' => $groups]);
     }
 
-    public function create () {
+    public function create()
+    {
 
-        return view ('groups.create');
+        return view('groups.create');
     }
 
-    public function store () {
+    public function store()
+    {
 
         request()->validate([
             'name' => 'required'
@@ -38,7 +41,8 @@ class GroupController extends Controller
         return redirect('/');
     }
 
-    public function show (Group $group) {
+    public function show(Group $group)
+    {
 
         $users = User::whereAttachedTo($group)->get();
 
@@ -46,30 +50,10 @@ class GroupController extends Controller
             abort(403);
         }
 
-        //$expenses = Expense::with()
+
         return view('groups.show', [
             'group' => $group,
-            'users'=> $users]);
+            'users' => $users]);
 
     }
-
-    public function addUser (Group $group) {
-
-        if ($group -> users -> doesntContain(Auth::user())) {
-            abort(403);
-        }
-
-        $user = User::where('email', request('email'))->first();
-
-        if (! $user) {
-            $user = User::create([
-                'email' => request('email'),
-            ]);
-        }
-
-        $group->users()->syncWithoutDetaching($user);
-
-        return redirect()->back();
-
-        }
 }
