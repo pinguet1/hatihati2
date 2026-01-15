@@ -19,7 +19,12 @@ class Expense extends Model
         return $this -> belongsTo(User::class, 'paid_by');
     }
 
-    public function groups() :BelongsTo
+    public function user()
+    {
+        return $this -> belongsTo(User::class);
+    }
+
+    public function group() :BelongsTo
     {
 
         return $this -> belongsTo(Group::class, 'group_id');

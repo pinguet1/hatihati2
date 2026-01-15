@@ -51,7 +51,14 @@
 
 @foreach($expenses as $expense)
 
-    {{ $expense->paid_by }}
+    {{ $expense->description }}
 
+    <div>
+        added by {{ $expense->user->name }}
+    </div>
+
+    <div>
+        from {{ $expense->group->name }}
+    </div>
 @endforeach()
 
