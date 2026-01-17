@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignIdFor('expense_id')->constrained('expenses');
             $table->foreignIdFor('user_id')->constrained('users');
             $table->decimal('split_amount');
-            $table->boolean('is_paid');
+            $table->boolean('is_paid')->nullable();
             $table->string('proof_of_payment')->nullable();
             $table->timestamps();
         });

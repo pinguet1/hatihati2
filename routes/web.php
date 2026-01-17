@@ -27,4 +27,7 @@ Route::post('/group/{group}/people', [GroupUserController::class,'create']);
 
 Route::post('/expenses/{group}', [\App\Http\Controllers\ExpenseController::class, 'store']);
 
+Route::get('group/expenses/{expense}', function (Expense $expense) {
 
+    return view('expenses.show', ['expense'=>$expense]);
+});

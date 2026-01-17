@@ -51,7 +51,10 @@
 
 @foreach($expenses as $expense)
 
-    {{ $expense->description }}
+    <a href="expenses/{{ $expense->id }}">
+        {{ $expense->description }}
+        {{ $expense->amount }}
+    </a>
 
     <div>
         added by {{ $expense->user->name }}
@@ -60,5 +63,7 @@
     <div>
         from {{ $expense->group->name }}
     </div>
+
 @endforeach()
+
 
