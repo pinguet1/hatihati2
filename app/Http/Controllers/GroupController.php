@@ -46,7 +46,7 @@ class GroupController extends Controller
 
         $users = User::whereAttachedTo($group)->get();
 
-        $expenses = Expense::whereBelongsto($group)->get();
+        $expenses = Expense::whereBelongsTo($group)->get();
 
         if ($users->doesntContain(Auth::user())) {
             abort(403);
