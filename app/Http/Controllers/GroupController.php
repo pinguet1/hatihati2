@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Expense;
 use App\Models\Group;
+use App\Models\Payment;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +17,11 @@ class GroupController extends Controller
         $groups = Group::whereAttachedTo(
             Auth::user())->get();
 
-        return view('home', ['groups' => $groups]);
+        $payments = Payment::whereBelongsTo(
+            Auth::user())->get();
+
+        return view('home', ['groups' => $groups,
+            'payments' => $payments]);
     }
 
     public function create()

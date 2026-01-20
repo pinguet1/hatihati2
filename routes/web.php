@@ -51,7 +51,7 @@ Route::post('group/expenses/{expense}/payments/split', function (Expense $expens
             'is_paid' => false,
             'user_id' => $userID,
             'expense_id' => $expense->id
-
-
     ]);
+
+    return redirect()->back();
 });

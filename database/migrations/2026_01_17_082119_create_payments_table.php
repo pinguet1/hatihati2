@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor('expense_id')->constrained('expenses');
-            $table->foreignIdFor('user_id')->constrained('users');
+            $table->foreignId('expense_id')->constrained('expenses');
+            $table->foreignId('user_id')->constrained('users');
             $table->decimal('split_amount');
             $table->boolean('is_paid')->nullable();
             $table->string('proof_of_payment')->nullable();
