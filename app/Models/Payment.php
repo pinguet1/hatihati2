@@ -10,7 +10,8 @@ class Payment extends Model
       'split_amount',
         'is_paid',
         'user_id',
-        'expense_id'
+        'expense_id',
+        'proof_of_payment'
     ];
     public function user()
     {

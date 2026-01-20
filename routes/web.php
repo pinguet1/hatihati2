@@ -61,3 +61,15 @@ Route::get('payments/{payment}', function (Payment $payment) {
     return view('payments.show', ['payment'=>$payment]);
 
 });
+
+Route::post('payments/{payment}/mark-as-paid', function(Payment $payment) {
+    if (request('proof_of_payment')) {
+        request('proof_of_payment')->store('payments');
+    }
+
+    $payment->update([
+        'is_paid'=>true
+    ]);
+
+    return redirect()->back();
+});
