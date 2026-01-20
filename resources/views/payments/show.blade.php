@@ -7,11 +7,15 @@
     </h3>
 
 <div>
-    <form action="payments/{payment}/mark-as-paid"
+
+    <form action="{{$payment->id}}/mark-as-paid"
           method="POST"
           enctype="multipart/form-data">
+        @csrf
 
         <input type="file" name="proof_of_payment">
+
+        <button>submit</button>
 
     </form>
 </div>
