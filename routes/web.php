@@ -55,3 +55,9 @@ Route::post('group/expenses/{expense}/payments/split', function (Expense $expens
 
     return redirect()->back();
 });
+
+Route::get('payments/{payment}', function (Payment $payment) {
+
+    return view('payments.show', ['payment'=>$payment]);
+
+});

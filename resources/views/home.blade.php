@@ -13,12 +13,15 @@
 <section>
     <h3>You have to pay up..</h3>
 
-    <li>
+    <div>
         @foreach($payments as $payment)
             <p>
-                {{$payment->expense->description}}  {{$payment->split_amount}}
+                {{$payment->expense->description}}
+                {{$payment->split_amount}}
+                <a href="payments/{{$payment->id}}">Bayad na?</a>
             </p>
         @endforeach
-    </li>
+    </div>
 
 </section>
+
