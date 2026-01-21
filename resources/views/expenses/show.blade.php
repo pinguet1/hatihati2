@@ -1,6 +1,6 @@
-@foreach($expenses as $expense)
+
     <h3>{{ $expense->description }} {{ $expense->amount }} added by {{$expense->user->name}}</h3>
-@endforeach
+
 
 <section>
     <p> Who's sharing the expense? </p>
