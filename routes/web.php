@@ -6,6 +6,7 @@ use App\Models\Expense;
 use App\Models\Group;
 use App\Models\Payment;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -62,13 +63,13 @@ Route::get('payments/{payment}', function (Payment $payment) {
 
 });
 
-Route::post('payments/{payment}/mark-as-paid', function(Payment $payment) {
-    if (request('proof_of_payment')) {
-        request('proof_of_payment')->store('payments');
-    }
+Route::post('payments/{payment}/mark-as-paid', function(Payment $payment, Request $request) {
+
+    $path = $request->file('proof_of_payment')->store('payments');
 
     $payment->update([
-        'is_paid'=>true
+        'is_paid'=>true,
+        'proof_of_payment' => $path
     ]);
 
     return redirect()->back();
