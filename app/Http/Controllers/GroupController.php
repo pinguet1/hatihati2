@@ -15,13 +15,18 @@ class GroupController extends Controller
     {
 
         $groups = Group::whereAttachedTo(
-            Auth::user())->get();
+            Auth::user())
+            ->get();
 
         $payments = Payment::whereBelongsTo(
-            Auth::user())->get();
+            Auth::user())
+            ->where('is_paid', 0)
+            ->get();
 
-        return view('home', ['groups' => $groups,
-            'payments' => $payments]);
+        return view('home', [
+            'groups' => $groups,
+            'payments' => $payments
+        ]);
     }
 
     public function create()
