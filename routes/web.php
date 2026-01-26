@@ -36,17 +36,4 @@ Route::get('group/expenses/{expense}', [GroupExpenseController::class, 'show']);
 Route::post('group/expenses/{expense}/payments/split', [GroupExpenseController::class, 'store']);
 
 Route::get('payments/{payment}', [PaymentController::class, 'create']);
-
-Route::post
-
-Route::post('payments/{payment}/mark-as-paid', function(Payment $payment, Request $request) {
-
-    $path = $request->file('proof_of_payment')->store('payments');
-
-    $payment->update([
-        'is_paid'=>true,
-        'proof_of_payment' => $path
-    ]);
-
-    return redirect()->back();
-});
+Route::post('payments/{payment}/mark-as-paid', [PaymentController::class, 'store']);
