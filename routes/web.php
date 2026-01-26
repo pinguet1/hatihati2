@@ -4,6 +4,7 @@ use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\GroupExpenseController;
 use App\Http\Controllers\GroupUserController;
+use App\Http\Controllers\PaymentController;
 use App\Models\Expense;
 use App\Models\Group;
 use App\Models\Payment;
@@ -32,14 +33,11 @@ Route::post('/group/{group}/people', [GroupUserController::class,'create']);
 Route::post('/expenses/{group}', [ExpenseController::class, 'store']);
 
 Route::get('group/expenses/{expense}', [GroupExpenseController::class, 'show']);
-
 Route::post('group/expenses/{expense}/payments/split', [GroupExpenseController::class, 'store']);
 
-Route::get('payments/{payment}', function (Payment $payment) {
+Route::get('payments/{payment}', [PaymentController::class, 'create']);
 
-    return view('payments.show', ['payment'=>$payment]);
-
-});
+Route::post
 
 Route::post('payments/{payment}/mark-as-paid', function(Payment $payment, Request $request) {
 
