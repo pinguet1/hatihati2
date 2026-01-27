@@ -15,13 +15,13 @@ class ExpenseController extends Controller
             'amount'=>'required',
         ]);
 
-        Expense::create([
+        $expense = Expense::create([
             'description' =>request('description'),
             'amount' => request('amount'),
             'user_id' => auth()->id(),
             'group_id' => $group->id
         ]);
 
-        return redirect()->back();
+        return redirect("group/expenses/$expense->id");
     }
 }
