@@ -48,7 +48,7 @@ class GroupController extends Controller
 
         Auth::user()->groups()->attach($group->id);
 
-        return redirect('/');
+        return redirect("/group/$group->id");
     }
 
     public function show(Group $group)
