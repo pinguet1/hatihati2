@@ -56,6 +56,6 @@ class GroupExpenseController extends Controller
             }
         }
 
-        return redirect()->back();
+        return redirect('/');
     }
 }
