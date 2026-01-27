@@ -25,13 +25,36 @@ class GroupExpenseController extends Controller
 
         $splitAmount = $expense->amount/count($selectedUsersID);
 
+        $existingPayments = Payment::where('expense_id', $expense->id)->get();
+
+        foreach ($existingPayments as $existingPayment) {
+            if (
+                ! in_array( $existingPayment->user_id, $selectedUsersID)
+            ){
+                $existingPayment->delete();
+            }
+        }
+
         foreach ($selectedUsersID as $userID)
-            Payment::create([
-                'split_amount' => $splitAmount,
-                'is_paid' => false,
-                'user_id' => $userID,
-                'expense_id' => $expense->id
-            ]);
+        {
+            //if user has splitamount in the same expense then do not give him another split amount
+            $existingPayment = Payment::where('expense_id', $expense->id)->where('user_id', $userID)->first();
+
+            if (! $existingPayment)
+            {
+                Payment::create([
+                    'split_amount' => $splitAmount,
+                    'is_paid' => false,
+                    'user_id' => $userID,
+                    'expense_id' => $expense->id
+                ]);
+            }
+            else {
+                $existingPayment->update([
+                   'split_amount' => $splitAmount
+                ]);
+            }
+        }
 
         return redirect()->back();
     }
